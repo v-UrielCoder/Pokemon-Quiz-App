@@ -27,7 +27,7 @@ export const useFetch = ( url ) => {
 
   useEffect(() => {
     
-    const data = getInfo()
+    getInfo()
     
   }, [ url ])
   
