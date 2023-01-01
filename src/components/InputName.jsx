@@ -11,10 +11,10 @@ export const InputName = ({ onCheckInput }) => {
         autoComplete="off"
         value={value}
         onChange = { (event) => setValue( event.target.value)}
-        
+        id="input-resp"
       />
 
-      <button onClick={ () => onCheckInput( value.toLowerCase()) }>Verificar</button>
+      <button id="button-check" onClick={ () => onCheckInput( value.toLowerCase()) }>Verificar</button>
     </>
   )
 }

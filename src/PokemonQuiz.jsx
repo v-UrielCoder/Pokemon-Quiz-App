@@ -8,7 +8,6 @@ export const PokemonQuiz = () => {
 
   const {counter, incrementScore} = useScore()
 
-
   const {id, changeID } = useRandomID()
 
   const {name, isLoading, img} = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -30,28 +29,34 @@ export const PokemonQuiz = () => {
 
 
   return (
+    
     <div className='container-main'>
-      <header>
-        <h1>Pokemon Quiz</h1>
-      </header>
+      <div className='container-aux'>
+        <header>
+          <h1 id='title'>Pokemon Quiz</h1>
+        </header>
 
-      <Score counter={counter} increase={incrementScore}/>
+        <Score counter={counter} increase={incrementScore}/>
 
-      <div className='container-info-game'>
-        <div className="container-image-pokemon">
-          {
-            isLoading ? <p>Cargando Pokemon...</p>
-                      :<img src={img} alt={name} />
-          }
+        <div className='container-info-game'>
+          <div className="container-image-pokemon">
+            {
+              isLoading ? <p id='loading'>Cargando Pokemon...</p>
+                        :<img id='pokemon-img' src={img} alt={name} />
+            }
+          </div>
+
+          <div className="container-controls">
+            {
+              isGameOver
+                      ? <ResetGame name={name} reset={resetGame} />
+                      : <Controls onCheckInput={onCheckInput} attempts={attempts}/>
+            }
+          </div>
+          
         </div>
-
-          {
-            isGameOver
-                    ? <ResetGame name={name} reset={resetGame} />
-                    : <Controls onCheckInput={onCheckInput} attempts={attempts}/>
-          }
-        
       </div>
+
     </div>
   )
 }
