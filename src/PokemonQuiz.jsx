@@ -1,45 +1,57 @@
-import React, { useState } from 'react'
-import { InputName } from './components/InputName'
-import { useFetch, useAttempts } from './hooks'
+import { Controls, ResetGame } from './components';
+import { Score } from './components/Score';
+import { useFetch, useAttempts, useRandomID, useScore } from './hooks'
 
 export const PokemonQuiz = () => {
   
-  const {attempts,isGameOver, increment} = useAttempts( 5 );
+  const {attempts, isGameOver, increment, reset} = useAttempts( 5 );
 
-  const {name, isLoading, img} = useFetch(`https://pokeapi.co/api/v2/pokemon/1/`)
+  const {counter, incrementScore} = useScore()
+
+
+  const {id, changeID } = useRandomID()
+
+  const {name, isLoading, img} = useFetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
 
   const onCheckInput = ( valueInput ) => {
     name.toLowerCase;
-    console.log(valueInput);
-
-    (name === valueInput)?console.log('Nombre correcto'):increment()
+    (name === valueInput)? resolve(): increment()
   }
 
-  console.log(attempts);
+  const resetGame = () => {
+    reset()
+    changeID()
+  }
+
+  const resolve = () => {
+    changeID()
+    incrementScore()
+  }
+
+
   return (
     <div className='container-main'>
       <header>
         <h1>Pokemon Quiz</h1>
       </header>
 
+      <Score counter={counter} increase={incrementScore}/>
+
       <div className='container-info-game'>
         <div className="container-image-pokemon">
           {
-            isLoading ? 'Cargando...':<img src={img} alt={name} />
+            isLoading ? <p>Cargando Pokemon...</p>
+                      :<img src={img} alt={name} />
           }
         </div>
 
           {
             isGameOver
-                      ? <h1>Perdiste</h1>
-                      : <div className="container-controls-player">
-                          <InputName onCheckInput={onCheckInput}/>
-                        </div>
+                    ? <ResetGame name={name} reset={resetGame} />
+                    : <Controls onCheckInput={onCheckInput} attempts={attempts}/>
           }
         
       </div>
-
-        
     </div>
   )
 }

@@ -10,6 +10,12 @@ export const useFetch = ( url ) => {
 
 
   const getInfo = async() => {
+
+    setDataPokemon({
+      ...dataPokemon,
+      isLoading: true
+    })
+
     const resp = await fetch( url )
     const {name, sprites} = await resp.json()
     const { front_default } = sprites;
@@ -28,7 +34,6 @@ export const useFetch = ( url ) => {
   useEffect(() => {
     
     getInfo()
-    
   }, [ url ])
   
   

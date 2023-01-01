@@ -1,7 +1,16 @@
-import React from 'react'
+import { useState } from "react"
+import { getRandomId } from "../helpers/getRandomId"
 
 export const useRandomID = () => {
-  return (
-    <div>useRandomID</div>
-  )
+
+  const [id, setId] = useState(getRandomId())
+
+  const changeID = () => {
+    setId(getRandomId())
+  }
+
+  return {
+    id,
+    changeID
+  }
 }

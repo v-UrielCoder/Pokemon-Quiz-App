@@ -1,13 +1,13 @@
 import { useState } from "react"
 
-export const useAttempts = ( maxAttemps ) => {
+export const useAttempts = ( maxAttemps = 5 ) => {
   
   const [controlAttempts, setControlAttempts] = useState({
     attempts: 0,
-    isGameOver: false
+    isFameOver: false
   })
 
-  const { attempts, isGameOver} = controlAttempts;
+  const { attempts } = controlAttempts;
 
   const increment = () => {
     (attempts < maxAttemps)
@@ -22,8 +22,16 @@ export const useAttempts = ( maxAttemps ) => {
                 })
   }
 
+  const reset = () => {
+    setControlAttempts({
+      attempts: 0,
+      isGameOver: false
+    })
+  }
+
   return {
     ...controlAttempts,
-    increment
+    increment,
+    reset
   }
 }
