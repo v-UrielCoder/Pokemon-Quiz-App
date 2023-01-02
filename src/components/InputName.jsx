@@ -13,8 +13,9 @@ export const InputName = ({ onCheckInput }) => {
         onChange = { (event) => setValue( event.target.value)}
         id="input-resp"
       />
-
-      <button id="button-check" onClick={ () => onCheckInput( value.toLowerCase()) }>Verificar</button>
+      <div className="container-btn">
+        <button id="button-check" onClick={ () => onCheckInput( value.toLowerCase()) }>Verificar</button>
+      </div>
     </>
   )
 }

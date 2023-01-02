@@ -4,7 +4,7 @@ import { useFetch, useAttempts, useRandomID, useScore } from './hooks'
 
 export const PokemonQuiz = () => {
   
-  const {attempts, isGameOver, increment, reset} = useAttempts( 5 );
+  const {attempts, isGameOver, increment, reset} = useAttempts( 4 );
 
   const {counter, incrementScore} = useScore()
 
